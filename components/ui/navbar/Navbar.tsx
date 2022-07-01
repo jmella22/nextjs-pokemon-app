@@ -1,17 +1,19 @@
 import React from "react";
 import NextLink from "next/link";
 
-import { useTheme, Text, Spacer, Link } from "@nextui-org/react";
+import { useTheme, Text, Spacer, Link, Switch } from "@nextui-org/react";
+import { useTheme as useNextTheme } from "next-themes";
 
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 
 export const Navbar = () => {
-  const { theme } = useTheme();
+  const { setTheme } = useNextTheme();
+  const { isDark, type } = useTheme();
 
   return (
     <div
-      style={{ backgroundColor: theme?.colors.gray50.value }}
+      // style={{ backgroundColor: theme?.colors.gray50.value }}
       className={styles.container}
     >
       <Image
@@ -29,11 +31,18 @@ export const Navbar = () => {
         </Link>
       </NextLink>
       <Spacer css={{ flex: 1 }} />
-      <NextLink href={"/favorites"} passHref>
-        <Link>
-          <Text>Favoritos</Text>
-        </Link>
-      </NextLink>
+      <div style={{ display: "flex" }}>
+        <NextLink href={"/favorites"} passHref>
+          <Link>
+            <Text>Favoritos</Text>
+          </Link>
+        </NextLink>
+        <Spacer />
+        <Switch
+          checked={isDark}
+          onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+        />
+      </div>
     </div>
   );
 };

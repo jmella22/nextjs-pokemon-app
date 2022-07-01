@@ -5,7 +5,6 @@ import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 
 import confetti from "canvas-confetti";
 
-import { pokeApi } from "../../api";
 import { Layout } from "../../components/layouts";
 import { getPokemonInfo, localFavorites } from "../../utils";
 import { PokemonDetails } from "../../interfaces";
@@ -110,7 +109,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const pokemon151: string[] = [...Array(151)].map(
+  const pokemon151: string[] = [...Array(10)].map(
     (value: any, index: number) => `${index + 1}`
   );
 
